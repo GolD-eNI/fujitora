@@ -4,7 +4,8 @@ const {
   app,
   Menu,
   Tray,
-  BrowserWindow
+  BrowserWindow,
+  shell
 } = require('electron')
 
 let appIcon = null
@@ -17,7 +18,6 @@ function createWindow() {
     icon: "./icon.ico",
     title: "Fujitora",
     frame: false,
-    closable: false,
     // fullscreen: true,
     webPreferences: {
       nodeIntegration: true
@@ -40,7 +40,7 @@ ipcMain.on('put-in-tray', (event) => {
 
   const contextMenu = Menu.buildFromTemplate([
     {
-      label: 'Remove',
+      label: 'Quit Fujitora',
       click: () => {
         event.sender.send('tray-removed')
       }
@@ -48,7 +48,7 @@ ipcMain.on('put-in-tray', (event) => {
     {
       label: 'Repositorie',
       click: () => {
-        electron.shell.openExternal('https://github.com/GolD-eNI/fujitora');
+        shell.openExternal('https://github.com/GolD-eNI/fujitora');
       }
     },
   ])
@@ -59,7 +59,8 @@ ipcMain.on('put-in-tray', (event) => {
 })
 
 ipcMain.on('remove-tray', () => {
-  appIcon.destroy()
+  appIcon.destroy();
+  app.quit();
 })
 
 app.on('activate', function () {
