@@ -1,0 +1,16 @@
+{
+  "name": "fujitora",
+  "productName": "fujitora",
+  "description": "My Electron application description",
+  "keywords": [],
+  "main": "./main.js",
+  "version": "1.0.0",
+  "author": "lamyh-port",
+  "scripts": {
+    "start": "electron ."
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "electron": "8.2.5"
+  }
+}

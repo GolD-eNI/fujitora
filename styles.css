@@ -1,0 +1,76 @@
+* {
+    box-sizing: border-box;
+}
+html {
+    margin: 0px;
+    height: 100%;
+    width: 100%;
+}
+body {
+    /* Configuration windows */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin: 0px;
+    padding: 0px;
+
+
+    background-color: #33393f;
+    color: whitesmoke;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+a, button, div, input, select, span, strong, textarea {
+    outline: 0;
+}
+.text-align-center {
+    text-align: center;
+}
+
+/* --background-tertiary: #202225; */
+
+/* Frame Moves */
+.winButton {
+    color: #b9bbbe;
+}
+.winButton {
+    position: relative;
+    top: -1px;
+    cursor: pointer;
+    width: 28px;
+    height: 24px;
+    pointer-events: auto;
+    -webkit-app-region: no-drag;
+}
+
+.alignCenter {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.justifyCenter {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+.withFrame {
+    height: 23px;
+    top: -4px;
+}
+.titleBar {
+    -webkit-app-region: drag;
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+}
+.directionRowReverse {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+}
+.flex-1 {
+    background-color: #202225;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
