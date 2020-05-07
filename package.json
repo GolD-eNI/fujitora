@@ -5,7 +5,7 @@
   "keywords": [],
   "main": "./main.js",
   "version": "1.0.0",
-  "author": "lamyh-port",
+  "author": "Gol.D.eNI",
   "scripts": {
     "start": "electron ."
   },
