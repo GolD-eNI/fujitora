@@ -1,13 +1,16 @@
+'use strict';
 const path = require('path')
 const {
   ipcMain,
   app,
+  BrowserWindow,
   Menu,
   Tray,
-  BrowserWindow,
   shell
 } = require('electron')
+// var discordBot = require('./src/discordbot.js')
 
+// Nécessaire pour l'icone dans la barre des taches
 let appIcon = null
 
 function createWindow() {
@@ -15,6 +18,9 @@ function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    minWidth: 800,
+    minHeight: 600,
+    center: true,
     icon: "./icon.ico",
     title: "Fujitora",
     frame: false,
@@ -24,8 +30,6 @@ function createWindow() {
     }
   })
   mainWindow.loadFile('index.html')
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
 }
 var ready = function () {
   createWindow()
@@ -33,35 +37,38 @@ var ready = function () {
 
 app.on('ready', ready)
 
+// Icone dans la barre des taches
 ipcMain.on('put-in-tray', (event) => {
   const iconName = process.platform === 'win32' ? 'icon.ico' : 'icon.ico'
   const iconPath = path.join(__dirname, iconName)
   appIcon = new Tray(iconPath)
 
   const contextMenu = Menu.buildFromTemplate([
-    {
+  {
       label: 'Quit Fujitora',
       click: () => {
-        event.sender.send('tray-removed')
+      event.sender.send('tray-removed')
       }
-    },
-    {
+  },
+  {
       label: 'Repositorie',
       click: () => {
-        shell.openExternal('https://github.com/GolD-eNI/fujitora');
+      shell.openExternal('https://github.com/GolD-eNI/fujitora');
       }
-    },
+  },
   ])
 
   appIcon.setToolTip('Fujitora')
   appIcon.setTitle("Fujitora")
   appIcon.setContextMenu(contextMenu)
 })
-
 ipcMain.on('remove-tray', () => {
+  // discordBot.killDiscordBot("kill");
   appIcon.destroy();
   app.quit();
 })
+
+
 
 app.on('activate', function () {
   if (BrowserWindow.getAllWindows().length === 0) {
@@ -71,12 +78,16 @@ app.on('activate', function () {
 
 app.on('window-all-closed', function () {
   if (appIcon) appIcon.destroy()
+  // discordBot.killDiscordBot();
   if (process.platform !== 'darwin') {
     app.quit()
   }
 })
 
+// Code Bot Discord
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and require them here.
+// ipcMain.on('start-discordbot', () => {
+//   discordBot.runDiscordBot();
+// })
+
 
